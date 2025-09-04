@@ -78,6 +78,35 @@ public class Board {
         }
     }
 
+    /**
+     * Check if the ship can be placed on the board
+     */
+    public void ValidateShioCoordinates(Ship ship) {
+        for (int[] coordinate : ship.GetPositions()) {
+            int row = coordinate[0];
+            int col = coordinate[1];
+            if (row > this.size || col > this.size) {
+                throw new Error("Ship Coordinates are out of bounds");
+            }
+            else if (this.mBoard.get(row)[col] != ' ') {
+                throw new Error("Ship Coordinates already taken");
+            }
+        }
+    }
 
+    /**
+     * Change the board into a string that can be used to system.out.println
+     * @return a string to represent our board
+     */
+    public String toString() {
+        String out = "";
+        int index = size;
 
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                out += String.format("[%s]", this.mBoard.get(y)[x]);
+            }
+        }
+        return out;
+    }
 }
